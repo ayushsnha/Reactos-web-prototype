@@ -22,7 +22,9 @@ class Panels extends Component {
                             <p><strong>Last Updated:</strong>{repo.updated_at}</p>
                             <h5><span className="label label-default">Language:{repo.language}</span></h5>
                     </div>
-                </div>   
+                    <hr></hr>
+                </div> 
+             
         // <li key={post.id}>
         // <strong>{post.title}</strong> 
         // <span>{post.body}</span>
