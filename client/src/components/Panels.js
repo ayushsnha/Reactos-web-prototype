@@ -9,7 +9,7 @@ class Panels extends Component {
     }
   render() {
     const repoItems=this.props.repos.map(repo=>{
-           console.log('hi')
+           
         return(
             <div className='panel panel-default' key={repo.id}>
                         <div className="panel-body"><h3> <a href={repo.html_url} >{repo.name}</a> :
@@ -44,7 +44,7 @@ class Panels extends Component {
 
 Panels.propTypes={
     fetchRepos:PropTypes.func.isRequired,
-    Repos:PropTypes.array.isRequired
+    
 }
 
 const mapStateToProps= state=>({

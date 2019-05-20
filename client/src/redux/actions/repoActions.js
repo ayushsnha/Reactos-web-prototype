@@ -8,7 +8,6 @@ export function fetchRepos(){
                     res.json()
                     
                     .then(data => {
-                        console.log(data)
                             dispatch({
                                 type:FETCH_REPOS,
                                 payload:data
