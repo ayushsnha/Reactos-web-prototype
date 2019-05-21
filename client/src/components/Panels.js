@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import {fetchRepos} from '../redux/actions/repoActions'
+import Loading from './Loading'
+import './css/panels.css'
 
 class Panels extends Component {
     componentWillMount(){
@@ -24,18 +26,16 @@ class Panels extends Component {
                     </div>
                     <hr></hr>
                 </div> 
-             
-        // <li key={post.id}>
-        // <strong>{post.title}</strong> 
-        // <span>{post.body}</span>
-        // </li>
         )
     })
 
     return (
       <div>
-       
-                    <div>{repoItems}</div>
+                    {this.props.load === false ? 
+                    <div>{repoItems}</div> :
+                    <div className='pos'><Loading/></div>
+                    }
+                    
                     
       </div>
     )
@@ -48,6 +48,7 @@ Panels.propTypes={
 }
 
 const mapStateToProps= state=>({
-    repos: state.repos.items
+    repos: state.repos.items,
+    load:state.repos.isLoading
 });
 export default  connect(mapStateToProps,{fetchRepos})(Panels) 

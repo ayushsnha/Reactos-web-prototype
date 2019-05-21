@@ -1,7 +1,8 @@
 import {FETCH_REPOS} from '../actions/types'
 
 const initialState={
-    items:[]
+    items:[],
+    isLoading:true
 }
 
 export default function(state = initialState,action){
@@ -9,6 +10,7 @@ export default function(state = initialState,action){
         case FETCH_REPOS:
         return {
             ...state,
+            isLoading:false,
             items:action.payload
         };
         default:

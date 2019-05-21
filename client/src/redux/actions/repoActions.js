@@ -10,7 +10,8 @@ export function fetchRepos(){
                     .then(data => {
                             dispatch({
                                 type:FETCH_REPOS,
-                                payload:data
+                                payload:data,
+                                isLoading:false
                             })
                         })
                         } else {throw Error(`Request rejected with status ${res.status}`);}
