@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express')
-
+var parse = require('parse-link-header');
 const app=   express();
 const PORT = process.env.PORT || 5000;
 const rp = require('request-promise');
@@ -28,10 +28,11 @@ if(!dev){
 
 var repos = {
     uri: 'https://api.github.com/users/reactos/repos',
+    resolveWithFullResponse: true,
     qs: {
         access_token: key, // -> uri + '?access_token=xxxxx%20xxxxx'
-        // per_page:5,
-        sort:"name",
+         per_page:12,
+        sort:"name"
     },
     headers: {
         'User-Agent': 'Request-Promise'
@@ -41,15 +42,64 @@ var repos = {
 
 
 app.get('/api/repos',(req,res)=>{
+    // rp(repos)
+    // .then(body=> {
+    //     res.json(body)
+    // })
+    // .catch(function (err) {
+    //     res.json({error:'oops...something went wrong'});
+    // });
+        
     rp(repos)
     .then(body=> {
-        res.json(body)
+        let link=body.headers.link
+        let parsed = parse(link)
+        let dataAndPage={
+            page:{
+                ...parsed
+            },
+            repo:body
+        }
+       
+        res.json(dataAndPage)
     })
     .catch(function (err) {
         res.json({error:'oops...something went wrong'});
     });
-        
 });
+
+
+// app.get('/api/repos/pages',(req,res)=>{
+//     rp(repos)
+//     .then(body=> {
+//         let link=body.headers.link
+//         repo=body;
+//         var parsed = parse(link)
+//         var Uparsed={
+//             page:{
+//                 ...parsed
+//             },
+//             repo:body
+//         }
+       
+//         res.json(Uparsed)
+//     })
+//     .catch(function (err) {
+//         res.json({error:'oops...something went wrong'});
+//     });
+        
+// });
+// app.get('/api/pages',(req,res)=>{
+//     rp(repos)
+//     .then(response=>{
+//     let Link;
+//     Link=response.headers.link
+//     var parsed = parse(data);
+//     res.json(parsed);
+//     }).catch(function (err) {
+//         res.json({error:'oops...something went wrong'});
+//     });
+// })
 
 
 

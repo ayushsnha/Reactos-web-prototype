@@ -10,7 +10,7 @@ export function fetchRepos(){
                     .then(data => {
                             dispatch({
                                 type:FETCH_REPOS,
-                                payload:data,
+                                payload:data.repo.body,
                                 isLoading:false
                             })
                         })
