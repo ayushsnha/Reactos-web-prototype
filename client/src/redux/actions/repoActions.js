@@ -11,6 +11,7 @@ export function fetchRepos(){
                             dispatch({
                                 type:FETCH_REPOS,
                                 payload:data.repo.body,
+                                paging:data.page.last.page,
                                 isLoading:false
                             })
                         })

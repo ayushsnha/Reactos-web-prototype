@@ -9,9 +9,10 @@ class Panels extends Component {
     componentWillMount(){
         this.props.fetchRepos();
     }
-  render() {
-    const repoItems=this.props.repos.map(repo=>{
-           
+
+
+    renderRepo=(repo)=>{
+
         return(
             <div className='panel panel-default' key={repo.id}>
                         <div className="panel-body"><h3> <a href={repo.html_url} >{repo.name}</a> :
@@ -27,12 +28,15 @@ class Panels extends Component {
                     <hr></hr>
                 </div> 
         )
-    })
+
+    }
+
+  render() {
 
     return (
       <div>
                     {this.props.load === false ? 
-                    <div>{repoItems}</div> :
+                    <div>{this.props.repos.map(this.renderRepo)}</div> :
                     <div className='pos'><Loading/></div>
                     }
                     

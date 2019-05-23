@@ -31,7 +31,7 @@ var repos = {
     resolveWithFullResponse: true,
     qs: {
         access_token: key, // -> uri + '?access_token=xxxxx%20xxxxx'
-         per_page:12,
+         per_page:2,
         sort:"name"
     },
     headers: {
@@ -56,7 +56,8 @@ app.get('/api/repos',(req,res)=>{
         let parsed = parse(link)
         let dataAndPage={
             page:{
-                ...parsed
+                ...parsed,
+
             },
             repo:body
         }
