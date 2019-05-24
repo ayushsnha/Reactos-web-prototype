@@ -3,7 +3,9 @@ import {FETCH_REPOS} from '../actions/types'
 const initialState={
     items:[],
     isLoading:true,
-    TotalPage:0
+    totalPage:null,
+    per_page:null,
+    current_page:null,
 }
 
 export default function(state = initialState,action){
@@ -13,7 +15,9 @@ export default function(state = initialState,action){
             ...state,
             isLoading:false,
             items:action.payload,
-            TotalPage:action.paging
+            totalPage:action.totalPage,
+            per_page:action.per_page,
+            current_page:action.current_page,
         };
         default:
         return state;

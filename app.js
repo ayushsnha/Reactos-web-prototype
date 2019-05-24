@@ -25,20 +25,27 @@ if(!dev){
 
 
 
+function apiReq(page){
 
-var repos = {
-    uri: 'https://api.github.com/users/reactos/repos',
-    resolveWithFullResponse: true,
-    qs: {
-        access_token: key, // -> uri + '?access_token=xxxxx%20xxxxx'
-         per_page:2,
-        sort:"name"
-    },
-    headers: {
-        'User-Agent': 'Request-Promise'
-    },
-    json: true // Automatically parses the JSON string in the response
-};
+    var repos = {
+        uri: 'https://api.github.com/users/reactos/repos',
+        resolveWithFullResponse: true,
+        qs: {
+            access_token: key, // -> uri + '?access_token=xxxxx%20xxxxx'
+            page:page, 
+            per_page:2,
+            sort:"name"
+        },
+        headers: {
+            'User-Agent': 'Request-Promise'
+        },
+        json: true // Automatically parses the JSON string in the response
+    };
+
+    return repos
+
+}
+
 
 
 app.get('/api/repos',(req,res)=>{
@@ -50,7 +57,7 @@ app.get('/api/repos',(req,res)=>{
     //     res.json({error:'oops...something went wrong'});
     // });
         
-    rp(repos)
+    rp(apiReq(req.query.page))
     .then(body=> {
         let link=body.headers.link
         let parsed = parse(link)

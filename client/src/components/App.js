@@ -4,7 +4,6 @@ import { Provider } from 'react-redux'
 import store from '../redux/store'
 import Navbar from './Navbar'
 import Panels from './Panels'
-import Paging from './Paging'
 
 
 function App() {
@@ -14,7 +13,6 @@ function App() {
      <Navbar/>
      <div className='container'>
      <Panels/>
-     <Paging/>
      </div>
    </div>
    </Provider>

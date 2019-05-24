@@ -1,8 +1,8 @@
 import {FETCH_REPOS} from './types'
 
-export function fetchRepos(){
+export function fetchRepos(pageNumber){
     return function(dispatch){
-        fetch("/api/repos")
+        fetch(`/api/repos?page=${pageNumber}`)
             .then(res =>{
                 if(res.ok){
                     res.json()
@@ -11,7 +11,9 @@ export function fetchRepos(){
                             dispatch({
                                 type:FETCH_REPOS,
                                 payload:data.repo.body,
-                                paging:data.page.last.page,
+                                totalPage:data.page.last!==undefined?data.page.last.page:parseInt(data.page.prev.page)+1,
+                                per_page:data.page.last!==undefined?data.page.last.per_page:data.page.prev.per_page,
+                                current_page:pageNumber,
                                 isLoading:false
                             })
                         })
