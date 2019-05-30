@@ -5,7 +5,6 @@ var parse = require('parse-link-header');
 const app=   express();
 const PORT = process.env.PORT || 5000;
 const rp = require('request-promise');
-app.set('view engine','ejs');
 const key=process.env.SECRET;
 
 const path = require('path'); 
